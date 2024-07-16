@@ -19,7 +19,7 @@ def highlightFace(net, frame, conf_threshold=0.7):
             x2 = int(detections[0, 0, i, 5] * frameWidth)
             y2 = int(detections[0, 0, i, 6] * frameHeight)
             faceBoxes.append([x1, y1, x2, y2])
-            cv2.rectangle(frameOpencvDnn, (x1, y1), (x2, y2), (0, 255, 0), int(round(frameHeight / 150)), 8)
+            cv2.rectangle(frameOpencvDnn, (x1, y1), (x2, y2), (0, 0, 255), int(round(frameHeight / 150)), 8)
     return frameOpencvDnn, faceBoxes
 
 faceProto = "opencv_face_detector.pbtxt"
@@ -57,7 +57,7 @@ image_pop_up = False
 image_pop_up2nd = False
 
 # Load the image to pop up
-pop_up_image = cv2.imread('Unwar_logo.png')
+pop_up_image = cv2.imread('penmaru_gel_2.jpeg')
 
 if pop_up_image is None:
     print("Error: Image not found or could not be loaded. Check the path and image file.")
@@ -97,7 +97,7 @@ while cv2.waitKey(1) < 0:
 
     if move_rectangle:
         # Draw and move the rectangle towards the target position
-        cv2.rectangle(resultImg, (rect_x, rect_y), (rect_x + rect_width, rect_y + rect_height), (0, 255, 0), 3)
+        cv2.rectangle(resultImg, (rect_x, rect_y), (rect_x + rect_width, rect_y + rect_height), (0, 0, 255), 3)
         cv2.putText(resultImg, 'Male, age: (100-120)', (rect_x, rect_y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv2.LINE_AA)
         if rect_x < target_x:
             rect_x += increment_x
