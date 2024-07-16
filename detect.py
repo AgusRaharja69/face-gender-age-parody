@@ -51,7 +51,7 @@ target_y = frame_height // 2 - rect_height // 2
 increment_x = 4
 increment_y = 4
 
-start_time = time.time()
+# start_time = time.time()
 move_rectangle = False
 image_pop_up = False
 image_pop_up2nd = False
@@ -70,9 +70,9 @@ while cv2.waitKey(1) < 0:
         cv2.waitKey()
         break
 
-    current_time = time.time()
-    if current_time - start_time >= 10:
-        move_rectangle = True
+    # current_time = time.time()
+    # if current_time - start_time >= 10:
+    #     move_rectangle = True
 
     resultImg, faceBoxes = highlightFace(faceNet, frame)
     if not faceBoxes:
@@ -110,12 +110,20 @@ while cv2.waitKey(1) < 0:
             image_pop_up = True
 
     if image_pop_up:
-        multiple = 100
-        for i in range(100):
+        multiple = 400
+        for i in range(400):
             resized_image = cv2.resize(pop_up_image, (int(frame_width/(multiple-i)), int(frame_height/(multiple-i))))
             resultImg = resized_image
 
     cv2.imshow("Detecting age and gender", resultImg)
+
+    key = cv2.waitKey(1)
+    if key == ord('m'):
+        start_time = time.time()
+        move_rectangle = True
+
+    if key == ord('q'):
+        break
 
 # Release the webcam and close windows
 video.release()
